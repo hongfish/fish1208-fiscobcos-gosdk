@@ -1,0 +1,5 @@
+#服务端口
+ServerPort: 8022
+
+#HelloWorld合约地址
+HelloWorldContractAddress: 0xb59ceceaede9017142056bc698b040d99df5096a
