@@ -1,13 +1,13 @@
 package config
 
 import (
-	"github.com/spf13/viper"
 	"github.com/fsnotify/fsnotify"
 	"github.com/labstack/gommon/log"
+	"github.com/spf13/viper"
 	"os"
 )
 
-var Config *viper.Viper
+var VConfig *viper.Viper
 
 func init() {
 	//监听改变动态跟新配置
@@ -37,6 +37,6 @@ func loadConfig() {
 		os.Exit(-1)
 	}
 	//全局配置
-	Config = viper.GetViper()
-	log.Infof("%v", Config.AllSettings())
+	VConfig = viper.GetViper()
+	log.Infof("%v", VConfig.AllSettings())
 }

@@ -1,24 +1,22 @@
 package bcos
 
 import (
+	"fish1208-fiscobcos-gosdk/config"
 	"github.com/FISCO-BCOS/go-sdk/client"
-	"github.com/labstack/gommon/log"
 	"github.com/FISCO-BCOS/go-sdk/conf"
+	"github.com/labstack/gommon/log"
 )
 
-//定义全局的client
-var ChainClient *client.Client
-
-func init(){
-	configs, err := conf.ParseConfigFile("config.toml")
+func GetChainClient() *client.Client {
+	configs, err := conf.ParseConfigFile(config.VConfig.GetString("BCOSConfig"))
 	if err != nil {
 		log.Fatal(err)
 	}
-	config := &configs[0]
+	chainClient, err1 := client.Dial(&configs[0])
 
-	ChainClient, err = client.Dial(config)
-
-	if err != nil {
-		log.Fatal(err)
+	if err1 != nil {
+		log.Fatal(err1)
+		return nil
 	}
+	return chainClient
 }

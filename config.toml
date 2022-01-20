@@ -4,7 +4,7 @@ CAFile="conf/ca.crt"
 Cert="conf/sdk.crt"
 Key="conf/sdk.key"
 [[Network.Connection]]
-NodeURL="192.168.229.161:20200"
+NodeURL="192.168.229.165:20200"
 GroupID=1
 
 

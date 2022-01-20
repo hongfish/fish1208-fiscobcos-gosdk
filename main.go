@@ -1,14 +1,19 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
-	"fish1208-fiscobcos-gosdk/controller"
+	"fish1208-fiscobcos-gosdk/common/xorm"
 	"fish1208-fiscobcos-gosdk/config"
+	"fish1208-fiscobcos-gosdk/controller"
+	"fish1208-fiscobcos-gosdk/service"
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
-
-	controller := &controller.Controller{}
+	dbengine := xorm.GetEngine(config.VConfig.GetString("DBConfig"))
+	controller := controller.NewController(
+		service.NewBlockLogService(dbengine),
+		service.NewBlockTranService(dbengine),
+	)
 
 	router := gin.Default()
 	api := router.Group("/api")
@@ -20,6 +25,5 @@ func main() {
 	}
 
 	//router.Run(":8022")
-	router.Run(":" + config.Config.GetString("ServerPort"))
+	router.Run(":" + config.VConfig.GetString("ServerPort"))
 }
-
